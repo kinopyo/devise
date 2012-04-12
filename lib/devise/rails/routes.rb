@@ -375,7 +375,9 @@ module ActionDispatch::Routing
 
       def devise_omniauth_callback(mapping, controllers) #:nodoc:
         path, @scope[:path] = @scope[:path], nil
-        path_prefix = "/#{mapping.path}/auth".squeeze("/")
+        # path_prefix = "/#{mapping.path}/auth".squeeze("/")
+        # monkey patch
+        path_prefix = "/auth".squeeze("/")
 
         if ::OmniAuth.config.path_prefix && ::OmniAuth.config.path_prefix != path_prefix
           raise "Wrong OmniAuth configuration. If you are getting this exception, it means that either:\n\n" \
